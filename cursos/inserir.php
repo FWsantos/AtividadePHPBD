@@ -1,4 +1,4 @@
-<?php include "../menu.php" ?>
+<?php include "../model/menu.php" ?>
 <h2>Insira um novo curso</h2>
 <br>
 <form method="POST" action="">
@@ -8,7 +8,7 @@
 </form>
 
 <?php
-require '../conexao.php';
+require '../model/conexao.php';
 
 if (isset($_POST["nameCurso"])) {
 

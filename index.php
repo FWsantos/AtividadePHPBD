@@ -4,8 +4,8 @@
 	<title>AtividadePHPBD</title>
 </head>
 <body>
-<?php include "menu.php" ?>
+<?php include "model/menu.php" ?>
 
-<?php require 'conexao.php'; ?>
+<?php require 'model/conexao.php'; ?>
 </body>
 </html>
