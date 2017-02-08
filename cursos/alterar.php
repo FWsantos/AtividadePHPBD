@@ -1,45 +1,43 @@
-<?php include "../model/menu.php" ?>
+<?php include "index.php" ?>
 
 <h2>Altere o Status</h2>
 
 <?php 
-require '../model/conexao.php';
 
-$sqlIn="SELECT * FROM cursos";
+$sqlIn="SELECT * FROM curso";
 
 $result=$conn->query($sqlIn);
 ?>
 
-	
-	<?php
+
+<?php
 	// if ($result->num_rows>0) {
 	// 	while ($row=$result->fetch_assoc()) {
-	// 		$status = "";
-	// 		if ($row["status_curso"] == 1)
-	// 			$status = "ativado";
-	// 		else
-	// 			$status = "desativado";
 	// 		echo "Nome do Curso: ".$row["nome_curso"]." - Status <button name='curso'>$status</button><input type='hidden' name='cursoid' value='".$row["id"]."'><input type='hidden' name='novo_status' value='".$row["status_curso"]."'><br>";
 	// 	}
 	// }
 	// else
 	// 	echo "0 resultados";
+    
+	foreach ($result as $row ) {
 
-	foreach ($result as $ro ) {
-		echo " Nome do Curso: ".$ro["nome_curso"] ."<br>";
-		echo " Status".$ro["id"]."<br>";
-		echo " Status".$ro["status_curso"]."<br>";
-		echo	"<form method='post' action=''>" ;
-		echo " <input type='hidden' name='cursoid' value='".$ro['id']."'>";
-		echo " <input type='hidden' name='novo_status' value='".$ro["status_curso"]."'>";
-		echo " Status <input type='submit' value='".$ro['status_curso']."' name='curso'><br>";		
-	echo	"</form>";
-		echo "<hr>";
+		if ($row["status_curso"] == 1)
+			$status = "ativado";
+		else if ($row["status_curso"] == 0)
+			$status = "desativado";
+
+		
+		echo " <form method='post' action=''>" ;
+		echo " <input type='hidden' name='cursoid' value='".$row['id']."'>";
+		echo " <input type='hidden' name='novo_status' value='".$row["status_curso"]."'>";
+		echo $row["nome_curso"]." <input type='submit' value='".$status."' name='curso'>";		
+		echo " </form>";
+		echo " <hr>";
 	}
 
-	?>
+?>
 
-	<br>
+<br>
 <!-- 	<button name="atualiza">Atualizar</button> -->
 
 
@@ -55,16 +53,16 @@ if (isset($_POST['cursoid'])){
 		$newStatus = 1;
 	}
 
-	$sqlUp = "UPDATE cursos SET status_curso = $newStatus WHERE id = $cursoId";
+	$sqlUp = "UPDATE curso SET status_curso = $newStatus WHERE id = $cursoId";
 
 	echo "<meta HTTP-EQUIV='refresh' CONTENT='1'>";
 	
 	if ($conn->query($sqlUp)===TRUE) {
-		echo "Atualizado com Sucesso";
+		echo "<script>alert('Atualizado com Sucesso')</script>";
 	}else{
 		echo "Erro";
 	}
-		
+
 	
 }
 ?>

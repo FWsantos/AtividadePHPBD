@@ -1,4 +1,4 @@
-<?php include "../model/menu.php" ?>
+<?php include "index.php" ?>
 <h2>Insira um novo curso</h2>
 <br>
 <form method="POST" action="">
@@ -8,13 +8,12 @@
 </form>
 
 <?php
-require '../model/conexao.php';
 
 if (isset($_POST["nameCurso"])) {
 
 	$curso = $_POST["nameCurso"];
 
-	$sql = "INSERT INTO cursos(nome_curso) VALUES('$curso')";
+	$sql = "INSERT INTO curso(nome_curso) VALUES('$curso')";
 
 	if ($conn->query($sql)===TRUE) {
 		echo "Adicionado com Sucesso";
